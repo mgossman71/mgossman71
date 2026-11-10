@@ -1,63 +1,60 @@
 # Hi, I'm Mark
 
-I build and document practical infrastructure with **Proxmox**, **Terraform**, **self-hosted apps**, and **automation**.
+Infrastructure engineer with **30+ years** in Unix/Linux, infrastructure, and automation. These days I run a Proxmox-based homelab with local GPUs, and I build the pieces that connect it to AI: **MCP servers** that give AI agents safe, scoped access to real infrastructure, **local LLM serving**, and the **automation and IaC** underneath it all.
 
-I bring **30+ years of experience** across **technology, infrastructure, and Unix/Linux systems**, and I use this GitHub to share practical work, reusable patterns, and lessons learned from real-world problem solving.
+Everything here runs in my own lab first. The READMEs document the path that actually worked, not the dead ends.
 
-## What I focus on
+---
 
-- **Infrastructure as Code** for Proxmox-based labs and services
-- **Self-hosted applications** with practical deployment patterns
-- **Automation** that reduces manual setup and operational drift
-- **Documentation and notes** that help others reproduce working solutions
-- **Backup and recovery patterns** for homelab and small-scale environments
+## 🤖 AI agents × infrastructure (MCP servers)
 
-## Featured repositories
+MCP servers that let Claude, Cline, and other agents observe and operate real systems. Each one uses scoped tokens and is **read-only or whitelisted by default**.
 
-### [proxmox-iac](https://github.com/mgossman71/proxmox-iac)
-Infrastructure-as-code patterns for deploying and managing Proxmox workloads.
+| Project | What it does |
+|---|---|
+| [proxmox-mcp](https://github.com/mgossman71/proxmox-mcp) | Manage Proxmox VE clusters through the REST API with a dedicated, scoped API token |
+| [proxmox-cve-mcp](https://github.com/mgossman71/proxmox-cve-mcp) | Scan Proxmox guests for pending security updates and correlate packages against OSV.dev CVEs, with no agent installed |
+| [Unifi-MCP](https://github.com/mgossman71/Unifi-MCP) | Read-only view of the UniFi network (gateway, switches, APs, clients) plus port-health checks for drop/error rates |
+| [HAs-MCP](https://github.com/mgossman71/HAs-MCP) | Whitelisted Home Assistant control of approved lights and switches only |
+| [comfyui-mcp](https://github.com/mgossman71/comfyui-mcp) | Drive ComfyUI to generate images (FLUX) and music, and return the media to the model |
+| [Gmail-MCP](https://github.com/mgossman71/Gmail-MCP) | Gmail + Google Calendar as 17 MCP tools over HTTP |
 
-### [SelfHostedApps](https://github.com/mgossman71/SelfHostedApps)
-A collection of self-hosted applications, configs, and deployment ideas for practical homelab use.
+## 🧠 Local LLM & GPU infrastructure
 
-### [backup_sets](https://github.com/mgossman71/backup_sets)
-Backup-focused work and patterns for protecting infrastructure and data.
+| Project | What it does |
+|---|---|
+| [vllm-install](https://github.com/mgossman71/vllm-install) | The working path to serving Qwen 27B with vLLM on an RTX 5090 (CUDA 13, Ubuntu 24.04) |
+| [vllm-dashboard](https://github.com/mgossman71/vllm-dashboard) | Real-time vLLM monitoring: KV cache, throughput, TTFT/TPOT latency, alerts (React + Prometheus) |
+| [token-logger](https://github.com/mgossman71/token-logger) | Transparent Ollama proxy that logs real token usage and estimates the equivalent OpenAI/Anthropic cost |
+| [InvokeAI-on-Proxmox-LXC](https://github.com/mgossman71/InvokeAI-on-Proxmox-LXC-with-RTX-5070Ti) | GPU passthrough into a Proxmox LXC and an InvokeAI install on an RTX 5070 Ti |
 
-### [Proxmox_Notes](https://github.com/mgossman71/Proxmox_Notes)
-Working notes, lessons learned, and implementation details from real Proxmox usage.
+## 🏗️ Infrastructure as Code & automation
 
-## What you'll find here
+| Project | What it does |
+|---|---|
+| [proxmox-iac](https://github.com/mgossman71/proxmox-iac) | Terraform modules and independent lab/prod stacks for Proxmox LXCs and VMs (bpg/proxmox) |
+| [Bootstrap-Server](https://github.com/mgossman71/Bootstrap-Server) | One-command Ansible bootstrap for Ubuntu 24.04 VMs and LXCs, served from a small nginx container |
+| [backup_sets](https://github.com/mgossman71/backup_sets) | Incremental rsync backup sets to USB disks, driven by YAML config with a web portal |
+| [SelfHostedApps](https://github.com/mgossman71/SelfHostedApps) | Ready-to-use Docker Compose configs for self-hosted services (Authentik, Grafana, Docmost, and more) |
 
-Most of my repositories are built around one or more of these goals:
+## 🧰 Self-hosted apps I've built
 
-- solving real technical problems
-- documenting what worked and what did not
-- creating reusable starting points
-- helping others learn faster from practical examples
+| Project | What it does |
+|---|---|
+| [TaskBoard](https://github.com/mgossman71/TaskBoard) | Multi-tenant project management: Kanban, dependencies, real-time collaboration (React + FastAPI + PostgreSQL) |
+| [Maintenance-Tracker](https://github.com/mgossman71/Maintenance-Tracker) | Vehicle and equipment maintenance tracking by miles, hours, and calendar time |
+| [home-dashboard](https://github.com/mgossman71/home-dashboard) | Fast homelab start page, editable entirely from the browser |
 
-## Why I share my work
+---
 
-I want these repositories to be useful beyond my own environment.
+## How I build
 
-Publishing code, notes, and deployment patterns helps me:
+- **Least privilege for agents.** AI gets dedicated tokens, read-only tools, and explicit whitelists, not root.
+- **Reproducible over clever.** Docker Compose, Terraform, and Ansible so anything can be rebuilt from the repo.
+- **Document the working path.** Exact versions, tested hardware, and the gotchas that cost me hours.
 
-- improve how I document and explain technical work
-- get feedback from other builders and engineers
-- create resources others can adapt and learn from
-- demonstrate technical depth, problem solving, and knowledge sharing
+## Stack
 
-## Current direction
-
-Right now I am especially interested in:
-
-- Proxmox automation
-- Terraform-driven infrastructure
-- self-hosted platforms and services
-- operational reliability and backup strategy
-- making technical work easier to understand and reproduce
-
-## Notes on this profile
-
-This GitHub is a collection of practical projects, notes, and infrastructure work in progress, with an emphasis on sharing what is useful, reusable, and real.
-
-If something here helps you, feel free to explore it, adapt it, and build on it.
+- **Infra:** Proxmox VE · LXC/QEMU · Terraform · Ansible · Docker Compose · nginx · UniFi · Home Assistant
+- **AI:** MCP · vLLM · Ollama · ComfyUI · InvokeAI · NVIDIA CUDA
+- **Code:** TypeScript · Python · Bash · React · FastAPI · PostgreSQL
